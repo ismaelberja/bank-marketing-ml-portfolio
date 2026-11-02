@@ -6,7 +6,7 @@
 
 `Python` · `pandas` · `scikit-learn` · `Gradient Boosting` · `Logistic Regression` · `Model Evaluation` · `Explainable ML` · `Business Analytics`
 
-> **Status:** Codebase and synthetic-fixture tests are ready. **The original 41,188-row UCI dataset must be downloaded and the real experiment executed before real test performance or business findings can be claimed.** The optional GitHub workflow performs those steps and publishes verified reports without uploading the original records. See [Results](#verified-experiment-results).
+> **Status: COMPLETE — original-data training and reporting verified.** All **41,188** UCI records were downloaded and hash-verified. The complete experiment and automated tests ran successfully on GitHub Actions. Real-data metrics and five diagnostic figures are now published. [View successful experiment](https://github.com/ismaelberja/bank-marketing-ml-portfolio/actions/runs/41493852916) · [Read full experiment report](reports/published/RESULTS.md).
 
 ## The business problem
 
@@ -106,7 +106,39 @@ A separate workflow, [**Train models and publish verified UCI results**](.github
 
 ## Verified experiment results
 
-**No model performance claims appear here until training on original UCI data has actually succeeded.** After the real-data workflow completes, see:
+The experiments below have **actually been executed on the original 41,188-row UCI dataset**, with a chronological 60/20/20 split, no call-duration predictor and an untouched final test sample.
+
+| Verified metric | Result |
+|---|---:|
+| Selected model | **Logistic regression** (selected by validation average precision) |
+| Held-out test records | **8,238** |
+| Positive class prevalence (test) | **30.83%** |
+| Test average precision | **0.529** |
+| Test ROC AUC | **0.749** |
+| Test Brier score | **0.191** |
+| Precision among the top 20% of records | **59.4%** |
+| Lift at 20% capacity versus test prevalence | **1.93×** |
+| Subscriptions within the 1,647 highest-ranked historical records | **979** |
+
+### What the results mean
+
+Under this historical test split, the model ranks observed subscriptions more effectively than a constant-score baseline. A hypothetical campaign contacting 20% of records would have included 979 historical subscribers among 1,647 selected records. **This is retrospective ranking, not causal lift or measured profit.**
+
+**Important limitation:** class prevalence rises from **4.81% in training** to **11.07% in validation** and **30.83% in the final test**. Validation average precision was only **0.099**, below validation prevalence, and ROC AUC was **0.490**. This large temporal drift means the final test results should **not** be interpreted as stable out-of-time performance or a deployable banking model. The project documents this limitation instead of hiding the inconvenient result.
+
+### Diagnostic figures
+
+![Precision–recall curves](reports/published/figures/precision_recall.png)
+
+![ROC curves](reports/published/figures/roc.png)
+
+![Permutation feature importance](reports/published/figures/permutation_importance.png)
+
+[Calibration plot](reports/published/figures/calibration.png) · [Campaign selection matrix](reports/published/figures/contact_matrix.png)
+
+### Reproducible experiment artifacts
+
+See:
 
 - [Real-data model comparison and business findings](reports/published/RESULTS.md)
 - [Machine-readable experiment manifest](reports/published/experiment.json)
