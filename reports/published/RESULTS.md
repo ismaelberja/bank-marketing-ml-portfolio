@@ -23,8 +23,10 @@
 
 | Model | Average precision | ROC AUC | Brier score | Precision @ capacity | Lift @ capacity |
 |---|---:|---:|---:|---:|---:|
-| random_prevalence_baseline | 0.308 | 0.500 | 0.273 | 8.0% | 0.26x |
+| constant_prevalence_baseline | 0.308 | 0.500 | 0.273 | n/a | n/a |
 | logistic_regression | 0.529 | 0.749 | 0.191 | 59.4% | 1.93x |
+
+**Baseline note:** a constant prior score cannot rank records; top-capacity precision and lift are not defined for this baseline.
 
 ## Campaign simulation
 

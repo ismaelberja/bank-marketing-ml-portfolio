@@ -2,7 +2,7 @@
   "dataset": "UCI bank-additional-full.csv",
   "original_data_verified": true,
   "data_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
-  "timestamp_utc": "2026-11-02T17:41:47.424170+00:00",
+  "timestamp_utc": "2026-11-02T17:44:12.460364+00:00",
   "splits": {
     "train": {
       "records": 24712,
@@ -69,8 +69,8 @@
       "simulated_incremental_vs_random": -9933.357611070647,
       "average_precision": 0.09926982845970982,
       "roc_auc": 0.4895397041778621,
-      "brier": 0.10985907990993778,
-      "log_loss": 1.10647409627719
+      "brier": 0.10985907990993796,
+      "log_loss": 1.1064740962772583
     },
     "gradient_boosting": {
       "n": 8238,
@@ -90,17 +90,17 @@
     }
   },
   "untouched_test": {
-    "random_prevalence_baseline": {
+    "constant_prevalence_baseline": {
       "n": 8238,
       "positive_rate": 0.3083272638990046,
       "selected": 1647,
-      "conversions_captured": 131,
-      "precision_at_capacity": 0.07953855494839102,
-      "recall_at_capacity": 0.0515748031496063,
-      "lift_at_capacity": 0.2579679589231674,
-      "simulated_net_value": 4865.0,
+      "conversions_captured": null,
+      "precision_at_capacity": null,
+      "recall_at_capacity": null,
+      "lift_at_capacity": null,
+      "simulated_net_value": null,
       "expected_random_net_value": 42546.50036416606,
-      "simulated_incremental_vs_random": -37681.50036416606,
+      "simulated_incremental_vs_random": null,
       "average_precision": 0.3083272638990046,
       "roc_auc": 0.5,
       "brier": 0.273087951056874,
@@ -119,8 +119,8 @@
       "simulated_incremental_vs_random": 47118.49963583394,
       "average_precision": 0.529090244836325,
       "roc_auc": 0.748614377748236,
-      "brier": 0.1905827616369582,
-      "log_loss": 0.5699284409023111
+      "brier": 0.19058276163695384,
+      "log_loss": 0.5699284409022952
     }
   },
   "age_band_audit": [
