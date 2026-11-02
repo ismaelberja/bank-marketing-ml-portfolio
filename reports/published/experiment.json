@@ -1,0 +1,174 @@
+{
+  "dataset": "UCI bank-additional-full.csv",
+  "original_data_verified": true,
+  "data_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
+  "timestamp_utc": "2026-11-02T17:41:47.424170+00:00",
+  "splits": {
+    "train": {
+      "records": 24712,
+      "positive_rate": 0.04807381029459372,
+      "row_start": 0,
+      "row_end_inclusive": 24711
+    },
+    "validation": {
+      "records": 8238,
+      "positive_rate": 0.11070648215586307,
+      "row_start": 24712,
+      "row_end_inclusive": 32949
+    },
+    "test": {
+      "records": 8238,
+      "positive_rate": 0.3083272638990046,
+      "row_start": 32950,
+      "row_end_inclusive": 41187
+    }
+  },
+  "selected_model": "logistic_regression",
+  "feature_columns": [
+    "campaign",
+    "pdays",
+    "previous",
+    "emp.var.rate",
+    "cons.price.idx",
+    "cons.conf.idx",
+    "euribor3m",
+    "nr.employed",
+    "job",
+    "education",
+    "default",
+    "housing",
+    "loan",
+    "contact",
+    "month",
+    "day_of_week",
+    "poutcome"
+  ],
+  "excluded_columns": [
+    "age",
+    "duration",
+    "marital",
+    "y"
+  ],
+  "assumptions": {
+    "capacity_fraction": 0.2,
+    "value_per_conversion": 100.0,
+    "contact_cost": 5.0,
+    "currency": "EUR (hypothetical)"
+  },
+  "validation": {
+    "logistic_regression": {
+      "n": 8238,
+      "positive_rate": 0.11070648215586307,
+      "selected": 1647,
+      "conversions_captured": 83,
+      "precision_at_capacity": 0.050394656952034,
+      "recall_at_capacity": 0.09100877192982457,
+      "lift_at_capacity": 0.4552096315469914,
+      "simulated_net_value": 65.0,
+      "expected_random_net_value": 9998.357611070647,
+      "simulated_incremental_vs_random": -9933.357611070647,
+      "average_precision": 0.09926982845970982,
+      "roc_auc": 0.4895397041778621,
+      "brier": 0.10985907990993778,
+      "log_loss": 1.10647409627719
+    },
+    "gradient_boosting": {
+      "n": 8238,
+      "positive_rate": 0.11070648215586307,
+      "selected": 1647,
+      "conversions_captured": 118,
+      "precision_at_capacity": 0.071645415907711,
+      "recall_at_capacity": 0.12938596491228072,
+      "lift_at_capacity": 0.6471655002716263,
+      "simulated_net_value": 3565.0,
+      "expected_random_net_value": 9998.357611070647,
+      "simulated_incremental_vs_random": -6433.357611070647,
+      "average_precision": 0.09341420726903195,
+      "roc_auc": 0.4262525084893506,
+      "brier": 0.10416311357971703,
+      "log_loss": 0.4046272799887638
+    }
+  },
+  "untouched_test": {
+    "random_prevalence_baseline": {
+      "n": 8238,
+      "positive_rate": 0.3083272638990046,
+      "selected": 1647,
+      "conversions_captured": 131,
+      "precision_at_capacity": 0.07953855494839102,
+      "recall_at_capacity": 0.0515748031496063,
+      "lift_at_capacity": 0.2579679589231674,
+      "simulated_net_value": 4865.0,
+      "expected_random_net_value": 42546.50036416606,
+      "simulated_incremental_vs_random": -37681.50036416606,
+      "average_precision": 0.3083272638990046,
+      "roc_auc": 0.5,
+      "brier": 0.273087951056874,
+      "log_loss": 0.8943913508835881
+    },
+    "logistic_regression": {
+      "n": 8238,
+      "positive_rate": 0.3083272638990046,
+      "selected": 1647,
+      "conversions_captured": 979,
+      "precision_at_capacity": 0.5944140862173649,
+      "recall_at_capacity": 0.38543307086614176,
+      "lift_at_capacity": 1.9278674182120679,
+      "simulated_net_value": 89665.0,
+      "expected_random_net_value": 42546.50036416606,
+      "simulated_incremental_vs_random": 47118.49963583394,
+      "average_precision": 0.529090244836325,
+      "roc_auc": 0.748614377748236,
+      "brier": 0.1905827616369582,
+      "log_loss": 0.5699284409023111
+    }
+  },
+  "age_band_audit": [
+    {
+      "group": "18-35",
+      "n": 4050,
+      "base_rate": 0.285679012345679,
+      "selection_rate": 0.17802469135802468,
+      "true_positive_rate": 0.3742437337942956,
+      "false_positive_rate": 0.09955063947459385,
+      "precision": 0.6005547850208044
+    },
+    {
+      "group": "36-55",
+      "n": 2946,
+      "base_rate": 0.2892057026476578,
+      "selection_rate": 0.17073998642226748,
+      "true_positive_rate": 0.3474178403755869,
+      "false_positive_rate": 0.0988538681948424,
+      "precision": 0.588469184890656
+    },
+    {
+      "group": "56+",
+      "n": 1237,
+      "base_rate": 0.42764753435731606,
+      "selection_rate": 0.3395311236863379,
+      "true_positive_rate": 0.4706994328922495,
+      "false_positive_rate": 0.24152542372881355,
+      "precision": 0.5928571428571429
+    }
+  ],
+  "permutation_importance": {
+    "campaign": 0.011513294911657859,
+    "pdays": 0.034398975918216,
+    "previous": -0.0009209591706306752,
+    "emp.var.rate": 0.0,
+    "cons.price.idx": 0.0,
+    "cons.conf.idx": 0.0,
+    "euribor3m": 0.0018519833463980968,
+    "nr.employed": 0.0,
+    "job": -0.0019968791050191024,
+    "education": 6.849393052876795e-05,
+    "default": 0.0023810908363362713,
+    "housing": -6.180445750750274e-05,
+    "loan": 0.0022194703278296444,
+    "contact": 0.004625883874024304,
+    "month": 0.0,
+    "day_of_week": 0.011121006648658264,
+    "poutcome": 0.006463365102942274
+  }
+}
