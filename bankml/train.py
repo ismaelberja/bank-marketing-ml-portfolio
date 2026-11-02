@@ -58,6 +58,10 @@ def concise(num, decimals=3):
     return 'n/a' if num is None else f'{num:.{decimals}f}'
 
 
+def fmt_lift(value):
+    return 'n/a' if value is None else f'{value:.2f}x'
+
+
 def report(dataset, manifest, holdout_metrics, validation_metrics, audit, importance):
     a = manifest['assumptions']
     winner = manifest['selected_model']
@@ -93,8 +97,8 @@ def report(dataset, manifest, holdout_metrics, validation_metrics, audit, import
         lines.append(f'| {model_name} | {concise(m["average_precision"])} | '
                      f'{concise(m["roc_auc"])} | {concise(m["brier"])} | '
                      f'{percent(m["precision_at_capacity"])} | '
-                     f'{concise(m["lift_at_capacity"], 2)}x |')
-    lines += ['', '## Campaign simulation', '',
+                     f'{fmt_lift(m["lift_at_capacity"])} |')
+    lines += ['', '**Baseline note:** a constant prior score cannot rank records; top-capacity precision and lift are not defined for this baseline.', '', '## Campaign simulation', '',
               f'- **Contact capacity:** top {a["capacity_fraction"]:.0%} of the test records ranked by score.',
               f'- **Hypothetical value per observed subscription:** €{a["value_per_conversion"]:,.0f}.',
               f'- **Hypothetical cost per contact:** €{a["contact_cost"]:,.0f}.',
@@ -197,10 +201,14 @@ def run(data_path: str | Path, output: str | Path, fast=False, importance_limit=
     dummy.fit(xtrainval, ytrainval)
     results = {}
     predictions = {}
-    for name, model in [('random_prevalence_baseline', dummy), (winner, selected_model)]:
+    for name, model in [('constant_prevalence_baseline', dummy), (winner, selected_model)]:
         proba = model.predict_proba(xte)[:, 1]
         predictions[name] = proba
         results[name] = evaluate(yte, proba, capacity, value_per_conversion, contact_cost)
+        if name == 'constant_prevalence_baseline':
+            for key in ('conversions_captured', 'precision_at_capacity', 'recall_at_capacity',
+                        'lift_at_capacity', 'simulated_net_value', 'simulated_incremental_vs_random'):
+                results[name][key] = None
     select = top_k_mask(predictions[winner], capacity)
     audit = subgroup_audit(yte, predictions[winner], test['age'].to_numpy(), capacity, min_n=20 if fast else 100)
     imp = permutation_importance(selected_model, xte.iloc[:importance_limit], yte[:importance_limit],
