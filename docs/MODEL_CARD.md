@@ -19,6 +19,19 @@ Moro, S., Rita, P., & Cortez, P. (2014). Bank Marketing [Dataset]. UCI Machine L
 
 One chronological split: 60% fit, 20% candidate selection, 20% untouched test. Model selection uses **validation average precision**, to accommodate asymmetric class prevalence. No accuracy-only claims. Final model is refit on 80%, tested only once. Report precision–recall AUC, ROC AUC, Brier, PR curves, calibration, subgroup audit and capacity-constrained rankings.
 
+## Verified original-data evaluation (historical 2008–2010)
+
+The complete GitHub Actions experiment ran on the UCI `bank-additional-full.csv` file (41,188 records), with source integrity verified via SHA-256. A fixed chronological 60/20/20 split yielded 24,712 train, 8,238 validation and 8,238 test rows.
+
+- **Champion:** logistic regression, selected by validation average precision when compared with histogram gradient boosting.
+- **Validation:** class prevalence 11.07%, average precision **0.099**, ROC AUC **0.490**. These weak scores indicate limited validation ranking performance.
+- **Untouched final test:** class prevalence 30.83%, average precision **0.529**, ROC AUC **0.749**, Brier score **0.191**.
+- **Capacity ranking:** precision **59.4%** among the highest-scored 20% of historically contacted records (1,647 records), representing **1.93×** the test positive prevalence.
+- **Strong temporal drift:** the positive rate rises from 4.81% (train) to 11.07% (validation) to 30.83% (test); the difference in validation vs test performance undermines claims of stable deployment generalization.
+- A constant-prevalence baseline has no meaningful ranking, so top-capacity precision and lift are intentionally **not applicable**.
+
+These are historical diagnostic outcomes, not a stable modern forecast or measured incremental profit. For source hashes, reproducible figures, subgroup comparisons and detailed model outputs, see [results](../reports/published/RESULTS.md) and [experiment manifest](../reports/published/experiment.json).
+
 ## Business experiment limitations
 
 Illustrative contact value €100 and call cost €5 are **assumptions**, not amounts provided by UCI or by any bank. Expected random targeting uses the test-set prevalence solely as a historical comparator. Retrospective outcomes are not a randomized uplift or an estimated causal treatment effect.
