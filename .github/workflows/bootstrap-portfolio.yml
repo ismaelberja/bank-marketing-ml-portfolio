@@ -20,7 +20,7 @@ jobs:
       - name: Verify and extract the 21-file source package
         run: |
           set -euo pipefail
-          cat staging/chunk-*.b64 | base64 --decode > /tmp/portfolio.tar.xz
+          cat staging/chunk-0[0-4].b64 staging/chunk-05-[0-7].b64 | base64 --decode > /tmp/portfolio.tar.xz
           echo "9670f30e229da95b1acb32e3bf56dc9f17d7ef192a2a3f73fe02175318023dac  /tmp/portfolio.tar.xz" | sha256sum --check
           tar -xJf /tmp/portfolio.tar.xz
           rm -rf staging
