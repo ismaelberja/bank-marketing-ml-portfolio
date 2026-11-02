@@ -24,7 +24,10 @@ jobs:
           echo "9670f30e229da95b1acb32e3bf56dc9f17d7ef192a2a3f73fe02175318023dac  /tmp/portfolio.tar.xz" | sha256sum --check
           tar -xJf /tmp/portfolio.tar.xz
           rm -rf staging
-          rm .github/workflows/bootstrap-portfolio.yml
+          # A GitHub Actions token is not permitted to change workflow files.
+          # Keep this bootstrap workflow unchanged, and install the other
+          # workflows through the separately authorized GitHub connection.
+          rm .github/workflows/tests.yml .github/workflows/publish-results.yml
           test -f bankml/train.py
           test -f README.md
           test -f .github/workflows/publish-results.yml
