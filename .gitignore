@@ -1,0 +1,21 @@
+# Never publish the original banking CSV or local model artifacts.
+data/raw/*
+!data/raw/.gitkeep
+models/*
+!models/.gitkeep
+reports/generated/
+reports/published/
+!reports/published/RESULTS.md
+!reports/published/experiment.json
+!reports/published/figures/
+!reports/published/figures/*.png
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+.env
+*.joblib
+*.pkl
+*.csv
+!.github/workflows/*.yml
+.DS_Store
